@@ -1,0 +1,31 @@
+
+#计算编辑距离，从而获取进行错误纠正
+class Levenshtein:
+    def minDistance(self, word1, word2):
+        n1, n2 = len(word1), len(word2)
+
+        def dp(i, j):
+            if i == -1: return j + 1
+            if j == -1: return i + 1
+
+            if word1[i] == word2[j]:  # 若字符串对应位置相等，则指针左移，不做操作
+                return dp(i - 1, j - 1)
+            else:  # 若字符串对应位置不相等，则进行插入、删除、替换操作
+                return min(
+                    dp(i, j - 1) + 1,  # 插入操作
+                    dp(i - 1, j) + 1,  # 删除操作
+                    dp(i - 1, j - 1) + 1  # 替换操作
+                )
+
+        # 调用递归函数
+        return dp(n1 - 1, n2 - 1)
+
+
+test = Levenshtein()
+word1_li = ["白扁逗", "白扁逗","白扁逗"]
+word2_li = ["白扁豆", "白芷","滑石"]
+for word1, word2 in zip(word1_li, word2_li):
+    # print("word1",word1)
+    # print("word2",word2)
+    print(test.minDistance(word1, word2))
+
