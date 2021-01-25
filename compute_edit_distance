@@ -1,5 +1,5 @@
 
-#计算编辑距离，从而获取进行错误纠正
+#计算编辑距离，从而进行错误纠正
 class Levenshtein:
     def minDistance(self, word1, word2):
         n1, n2 = len(word1), len(word2)
